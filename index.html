@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script src="./app.js"> </script>
+        <link rel="stylesheet" href="./site.css"></link>
+    </head>
+    <body>
+        <div id="countContainer">
+            <input type="text" name="rows" placeholder="Enter row count" oninput="onRowInput(event)"/>
+            <button id="submitButton" onclick="startGame()">Play</button>            
+        </div>       
+        <div id="mainContainer">
+            <div class="mb-20">
+                <button id="undoButton" onclick="undo()">Undo</button>
+                <button id="resetButton" onclick="reset()">Reset</button>
+            </div>            
+            <button id="upButton" onclick="moveUp()">Up</button> 
+            <div class="gridWrapper">
+                <button id="leftButton" onclick="moveLeft()">Left</button>
+                <div id="gridContainer">
+                            
+                </div>
+                <button id="rightButton" onclick="moveRight()">Right</button>
+            </div>            
+            <button id="downButton" onclick="moveDown()">Down</button>
+        </div>
+        <div id="overlay">
+            <div >Game Over !!!</div>
+            <div class="restart jello" onclick="location.reload()"><u>Restart</u></div>
+        </div>
+    </body>
+</html>
