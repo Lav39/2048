@@ -22,10 +22,11 @@ const colorHash = {
 } 
 let history = { }
 let gameStarted = false;
-
+let mobileView = false;
 // for mobile browser
 function starOnMobileBrowser(){
     if(document.body.clientWidth < 1000 ) {
+        mobileView = true;
         rowCount = 5;       
         startGame();
     }
@@ -103,9 +104,13 @@ function renderSquare(grid, container) {
             if( !win && value == 2048 ) {
                 win++;               
             }
-            let cellSize = (document.body.clientWidth/rowCount) - 50 + "px";  
+            if ( mobileView ) {
+                let cellSize = (document.body.clientWidth/rowCount) - 50 + "px";              
+                innerHTML += '<div class="cell" style="height:'+cellSize+';width:'+cellSize+'; background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
+            } else {
+                innerHTML += '<div class="cell" style="background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
+            }
             
-            innerHTML += '<div class="cell" style="height:'+cellSize+';width:'+cellSize+'; background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
         }
         innerHTML += '</div>';
     }
