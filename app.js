@@ -25,8 +25,8 @@ let gameStarted = false;
 
 // for mobile browser
 function starOnMobileBrowser(){
-    if(document.body.clientWidth < 600 ) {
-        rowCount = 5;
+    if(document.body.clientWidth < 1000 ) {
+        rowCount = 5;       
         startGame();
     }
 }
@@ -103,8 +103,9 @@ function renderSquare(grid, container) {
             if( !win && value == 2048 ) {
                 win++;               
             }
+            let cellSize = (document.body.clientWidth/rowCount) - 50 + "px";  
             
-            innerHTML += '<div class="cell" style="background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
+            innerHTML += '<div class="cell" style="height:'+cellSize+';width:'+cellSize+'; background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
         }
         innerHTML += '</div>';
     }
@@ -370,8 +371,8 @@ function swipedetect(el, callback){
       startY,
       distX,
       distY,
-      threshold = 150, //required min distance traveled to be considered swipe
-      restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+      threshold = 50, //required min distance traveled to be considered swipe
+      restraint = 200, // maximum distance allowed at the same time in perpendicular direction
       allowedTime = 300, // maximum time allowed to travel that distance
       elapsedTime,
       startTime,
@@ -418,7 +419,7 @@ function swipedetect(el, callback){
     }
     if (swipedir == "left") {
         moveLeft();
-    } else if (swipedir == "top") {
+    } else if (swipedir == "up") {
         moveUp();
     } else if (swipedir == "right") {
         moveRight();

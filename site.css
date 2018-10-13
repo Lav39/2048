@@ -3,7 +3,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #5C84FF
+    background: #5C84FF;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 #mainContainer {
     min-height: 100px;
@@ -29,8 +32,8 @@ body {
 .cell {
     margin: 1px;
     background: #d2691e;
-    width: 70px;
-    height: 70px;
+    width: 3.5em;
+    height: 3.5em;
     color: white;
     display: flex;
     justify-content: center;
@@ -130,8 +133,13 @@ body {
     text-align: center;
     width: 200px;
   }
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 1000px) {
     #upButton, #leftButton, #rightButton, #downButton {
         display: none;
     }
+    body, .cell {
+        font-size: 36px; 
+    }
+    
+    
 }
