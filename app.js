@@ -21,10 +21,20 @@ const colorHash = {
     8192: '#28ea64'
 } 
 let history = { }
+let gameStarted = false;
+
+// for mobile browser
+function starOnMobileBrowser(){
+    if(document.body.clientWidth < 600 ) {
+        rowCount = 5;
+        startGame();
+    }
+}
+starOnMobileBrowser();
 
 function onRowInput(event) {
     const input = event.charCode || event.keyCode; 
-    const value = parseInt(String.fromCharCode(input));
+    let value = parseInt(String.fromCharCode(input));
     const validKeyCode = [8,13, 18]    
     if( validKeyCode.indexOf(input) == -1 && ( (event.target.value) || (input < 52 || input > 57) ))  {
         event.preventDefault(); 
@@ -57,6 +67,7 @@ function startGame(){
     if( !rowCount ) {
         return;
     }
+    gameStarted = true;
     const countContainer = document.getElementById('countContainer');
     const mainContainer = document.getElementById('mainContainer');
     if( countContainer && mainContainer ) {
@@ -182,6 +193,22 @@ function insertAtIndex( value ) {
     }
 }
 
+document.onkeydown = function() {    
+    if( !gameStarted || rowCount == 0 ) {
+        return;
+    }
+    const input = window.event.charCode || window.event.keyCode;     
+   
+    if (input == "37") {
+        moveLeft();
+    } else if (input == "38") {
+        moveUp();
+    } else if (input == "39") {
+        moveRight();
+    } else if (input == "40") {
+        moveDown();
+    } 
+}
 
 function moveDown() {
     saveHistory();
@@ -333,3 +360,69 @@ function traverseRight(grid,row,col) {
        
     }
 }
+
+// handle swipe on mobile
+function swipedetect(el, callback){
+    
+      var touchsurface = el,
+      swipedir,
+      startX,
+      startY,
+      distX,
+      distY,
+      threshold = 150, //required min distance traveled to be considered swipe
+      restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+      allowedTime = 300, // maximum time allowed to travel that distance
+      elapsedTime,
+      startTime,
+      handleswipe = callback || function(swipedir){}
+    
+      touchsurface.addEventListener('touchstart', function(e){
+          var touchobj = e.changedTouches[0]
+          swipedir = 'none'
+          dist = 0
+          startX = touchobj.pageX
+          startY = touchobj.pageY
+          startTime = new Date().getTime() // record time when finger first makes contact with surface
+          e.preventDefault()
+      }, false)
+    
+      touchsurface.addEventListener('touchmove', function(e){
+          e.preventDefault() // prevent scrolling when inside DIV
+      }, false)
+    
+      touchsurface.addEventListener('touchend', function(e){
+          var touchobj = e.changedTouches[0]
+          distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+          distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+          elapsedTime = new Date().getTime() - startTime // get time elapsed
+          if (elapsedTime <= allowedTime){ // first condition for awipe met
+              if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+                  swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+              }
+              else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+                  swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+              }
+          }
+          handleswipe(swipedir)
+          e.preventDefault()
+      }, false)
+  }
+    
+  //USAGE:
+  
+  var el = document.getElementById('appContainer');
+  swipedetect(el, function(swipedir){
+    if( !gameStarted || rowCount == 0 ) {
+        return;
+    }
+    if (swipedir == "left") {
+        moveLeft();
+    } else if (swipedir == "top") {
+        moveUp();
+    } else if (swipedir == "right") {
+        moveRight();
+    } else if (swipedir == "down") {
+        moveDown();
+    } 
+  });

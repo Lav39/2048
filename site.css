@@ -130,3 +130,8 @@ body {
     text-align: center;
     width: 200px;
   }
+  @media only screen and (max-width: 600px) {
+    #upButton, #leftButton, #rightButton, #downButton {
+        display: none;
+    }
+}

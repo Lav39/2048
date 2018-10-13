@@ -1,9 +1,8 @@
 <html>
-    <head>
-        <script src="./app.js"> </script>
+    <head>        
         <link rel="stylesheet" href="./site.css"></link>
     </head>
-    <body>
+    <body id="appContainer" >
         <div id="countContainer">
             <input type="text" name="rows" placeholder="Enter number > 3" onkeydown="onRowInput(event)"/>
             <button id="submitButton" onclick="startGame()">Play</button>            
@@ -31,5 +30,6 @@
             <div >You win !!!</div>
             <div class="restart jello" onclick="continueGame()"><u>Continue</u></div>
         </div>
+        <script src="./app.js"> </script>
     </body>
 </html>
