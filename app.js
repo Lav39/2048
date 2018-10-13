@@ -185,18 +185,22 @@ function saveHistory() {
     filledValueCount ++;
 }
 function insertAtIndex( value ) {
-    const gridLength = grid.length;
-    const cellCount = (gridLength * gridLength) - 1;
-    const cellIndex = Math.floor((Math.random() * cellCount) );
-    const rowNumber = Math.floor(cellIndex / gridLength);
-    const colNumber = cellIndex % gridLength;    
-    if (!grid[rowNumber][colNumber]) {
-        grid[rowNumber][colNumber] = value;       
-        return;
-
-    } else {
-        insertAtIndex(value)
+    const gridLength = grid.length;    
+    let emptyCell = [];
+    let count = 0;
+    for (let row = 0 ; row < gridLength; row++ ) {
+        for( let col = 0; col < gridLength; col++ ) {
+            if( !grid[row][col] ) {
+                emptyCell.push(count);
+            }
+            count++;
+        }
     }
+    const cellCount = emptyCell.length - 1;
+    const cellIndex = Math.floor((Math.random() * cellCount) );
+    const rowNumber = Math.floor(emptyCell[cellIndex] / gridLength);
+    const colNumber = cellIndex % gridLength;    
+    grid[rowNumber][colNumber] = value;
 }
 
 document.onkeydown = function() {    
@@ -220,7 +224,7 @@ function moveDown() {
     saveHistory();
     const rowCount = grid.length - 1;
     const colCount = rowCount;
-    for(let row = rowCount; row >= 0; row-- ) {
+    for(let row = rowCount; row > rowCount-1; row-- ) {
         for(let col = colCount; col >= 0; col--) {
             traverseUp(grid,row,col);                               
         }
@@ -233,7 +237,7 @@ function moveUp() {
     saveHistory();
     const rowCount = grid.length;
     const colCount = rowCount;
-    for(let row = 0; row < rowCount; row++ ) {
+    for(let row = 0; row < 1; row++ ) {
         for(let col = 0; col < colCount; col++) {
             traverseDown(grid,row,col);                               
         }
@@ -247,7 +251,7 @@ function moveLeft() {
     const rowCount = grid.length;
     const colCount = rowCount;
     for(let row = 0; row < rowCount; row++ ) {
-        for(let col = 0; col < colCount; col++) {
+        for(let col = 0; col < 1; col++) {
             traverseRight(grid,row,col);                               
         }
     }
@@ -260,7 +264,7 @@ function moveRight() {
     const rowCount = grid.length - 1;
     const colCount = rowCount;
     for(let row = rowCount; row >= 0; row-- ) {
-        for(let col = colCount; col >= 0; col--) {
+        for(let col = colCount; col > colCount-1; col--) {
             traverseLeft(grid,row,col);                               
         }
     }
@@ -278,15 +282,22 @@ function traverseUp(grid,row,col) {
         if( grid[rowCount-1][col] == 0) {
             rowCount--;
         } else if ( grid[row][col] == 0 || grid[row][col] == grid[rowCount-1][col] ) {
+            const currentValue = grid[row][col];
             grid[row][col] += grid[rowCount-1][col];
             grid[rowCount-1][col] = 0;
-            break;
+            if ( !currentValue ) {
+                row--;
+            }            
+            rowCount--;
+           // break;
         } else if ( grid[row][col] !== grid[rowCount-1][col] ) {
             if( (row-1) != (rowCount-1)) {
                 grid[row-1][col] = grid[rowCount-1][col];
-                grid[rowCount-1][col] = 0;
-            }            
-            break;
+                grid[rowCount-1][col] = 0;                           
+            }    
+            row--;     
+            rowCount--;      
+           // break;
         }
        
     }
@@ -304,15 +315,23 @@ function traverseDown(grid,row,col) {
         if( grid[rowCount+1][col] == 0) {
             rowCount++;
         } else if ( grid[row][col] == 0 || grid[row][col] == grid[rowCount+1][col] ) {
+            const currentValue = grid[row][col];
             grid[row][col] += grid[rowCount+1][col];
             grid[rowCount+1][col] = 0;
-            break;
+            rowCount++;
+            if ( !currentValue ) {
+                row++; 
+            }              
+            //break;
         } else if ( grid[row][col] !== grid[rowCount+1][col] ) {
             if( (row+1) != (rowCount+1)) {
                 grid[row+1][col] = grid[rowCount+1][col];
                 grid[rowCount+1][col] = 0;
-            }            
-            break;
+                
+            }  
+            row++;      
+            rowCount++;    
+           // break;
         }
        
     }    
@@ -329,15 +348,23 @@ function traverseLeft(grid,row,col) {
         if( grid[row][colCount-1] == 0) {
             colCount--;
         } else if ( grid[row][col] == 0 || grid[row][col] == grid[row][colCount-1] ) {
+            const currentValue = grid[row][col];
             grid[row][col] += grid[row][colCount-1];
             grid[row][colCount-1] = 0;
-            break;
+            colCount--;
+            if ( !currentValue ) {
+                col--; 
+            }            
+            //break;
         } else if ( grid[row][col] !== grid[row][colCount-1] ) {
             if( (col-1) != (colCount-1)) {
                 grid[row][col-1] = grid[row][colCount-1];
                 grid[row][colCount-1] = 0;
-            }            
-            break;
+               
+            }        
+            col--;    
+            colCount--;
+            //break;
         }       
     }
 }
@@ -353,15 +380,23 @@ function traverseRight(grid,row,col) {
         if( grid[row][colCount+1] == 0) {
             colCount++;
         } else if ( grid[row][col] == 0 || grid[row][col] == grid[row][colCount+1] ) {
+            const currentValue = grid[row][col];
             grid[row][col] += grid[row][colCount+1];
             grid[row][colCount+1] = 0;
-            break;
+            colCount++;
+            if ( !currentValue ) {
+                col++;
+            }
+            
+           // break;
         } else if ( grid[row][col] !== grid[row][colCount+1] ) {
             if( (col+1) != (colCount+1)) {
                 grid[row][col+1] = grid[row][colCount+1];
-                grid[row][colCount+1] = 0;
-            }            
-            break;
+                grid[row][colCount+1] = 0;               
+            }     
+            col++
+            colCount++;       
+           // break;
         }
        
     }
