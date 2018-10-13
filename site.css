@@ -39,7 +39,6 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    font-family: cursive;
 }
 .gridWrapper {
     display: flex;
@@ -136,6 +135,11 @@ body {
   @media only screen and (max-width: 1000px) {
     #upButton, #leftButton, #rightButton, #downButton {
         display: none;
+    }
+    button {
+        font-size: 36px;
+        padding: 20px;
+        width: 150px;
     }
     body, .cell {
         font-size: 36px; 

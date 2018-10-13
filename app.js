@@ -10,8 +10,8 @@ const colorHash = {
     4: '#de925d',
     8: '#dc7229',
     16: '#ef6607',
-    32: '#e2e457',
-    64: '#e2e42a',
+    32: '#e2a316',
+    64: '#efa706',
     128: '#e8745a',
     256: '#f1512e',
     512: '#f73b12',
@@ -105,7 +105,7 @@ function renderSquare(grid, container) {
                 win++;               
             }
             if ( mobileView ) {
-                let cellSize = (document.body.clientWidth/rowCount) - 50 + "px";              
+                let cellSize = (document.body.clientWidth/rowCount) - 30 + "px";              
                 innerHTML += '<div class="cell" style="height:'+cellSize+';width:'+cellSize+'; background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
             } else {
                 innerHTML += '<div class="cell" style="background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
@@ -199,7 +199,7 @@ function insertAtIndex( value ) {
     const cellCount = emptyCell.length - 1;
     const cellIndex = Math.floor((Math.random() * cellCount) );
     const rowNumber = Math.floor(emptyCell[cellIndex] / gridLength);
-    const colNumber = cellIndex % gridLength;    
+    const colNumber = emptyCell[cellIndex] < gridLength-1 ? emptyCell[cellIndex] : cellIndex % gridLength;     
     grid[rowNumber][colNumber] = value;
 }
 

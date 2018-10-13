@@ -5,12 +5,12 @@
     <body id="appContainer" >
         <div id="countContainer">
             <input type="text" name="rows" placeholder="Enter number > 3" onkeydown="onRowInput(event)"/>
-            <button id="submitButton" onclick="startGame()">Play</button>            
+            <button id="submitButton" ontouchstart="startGame()" onclick="startGame()">Play</button>            
         </div>       
         <div id="mainContainer">
             <div class="mb-20">
-                <button id="undoButton" onclick="undo()">Undo</button>
-                <button id="resetButton" onclick="reset()">Reset</button>
+                <button id="undoButton" ontouchstart="undo()" onclick="undo()">Undo</button>
+                <button id="resetButton" ontouchstart="reset()" onclick="reset()">Reset</button>
             </div>            
             <button id="upButton" onclick="moveUp()">Up</button> 
             <div class="gridWrapper">
@@ -24,11 +24,11 @@
         </div>
         <div id="over" class="overlay">
             <div >Game Over !!!</div>
-            <div class="restart jello" onclick="location.reload()"><u>Restart</u></div>
+            <div class="restart jello" ontouchstart="location.reload()" onclick="location.reload()"><u>Restart</u></div>
         </div>
         <div id="win" class="overlay">
             <div >You win !!!</div>
-            <div class="restart jello" onclick="continueGame()"><u>Continue</u></div>
+            <div class="restart jello" ontouchstart="continueGame()"  onclick="continueGame()"><u>Continue</u></div>
         </div>
         <script src="./app.js"> </script>
     </body>
