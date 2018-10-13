@@ -29,13 +29,13 @@ body {
 .cell {
     margin: 1px;
     background: #d2691e;
-    width: 30px;
-    height: 30px;
+    width: 70px;
+    height: 70px;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
+    font-size: 20px;
     font-family: cursive;
 }
 .gridWrapper {
@@ -117,4 +117,16 @@ div#overlay {
     -webkit-transform-origin: center;
     transform-origin: center;
     animation-duration: 1s;
+  }
+  button {
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 5px;
+    width: 70px;
+  }
+  input {
+    font-size: 20px;
+    padding: 5px;
+    text-align: center;
+    width: 200px;
   }

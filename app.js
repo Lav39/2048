@@ -5,25 +5,32 @@ let filledValueCount = 0;
 const allowedNumber = [2,4];
 const colorHash = {
     0: '#a9a3a0',
-    2: '#d8905d',
+    2: '#bfa491',
     4: '#de925d',
-    8: '#e0915a',
-    16: '#e49056',
-    32: '#e28b4e',
-    64: '#e28645',
-    128: '#da7a36',
-    256: '#cc6c27',
-    512: '#b95e1d',
-    1024: '#ab5416',
-    2048: '#94460e',
-    4096: '#7d3909',
-    8192: '#582705'
+    8: '#dc7229',
+    16: '#ef6607',
+    32: '#e2e457',
+    64: '#e2e42a',
+    128: '#e8745a',
+    256: '#f1512e',
+    512: '#f73b12',
+    1024: '#acf151',
+    2048: '#97ea28',
+    4096: '#8bea0c',
+    8192: '#28ea64'
 } 
 let history = { }
 
-function onRowInput(event){
-    if(event.target.value){
-        rowCount = parseInt(event.target.value,10);
+function onRowInput(event) {
+    const input = event.charCode || event.keyCode; 
+    const value = parseInt(String.fromCharCode(input));
+    const validKeyCode = [8,13, 18]    
+    if( validKeyCode.indexOf(input) == -1 && ( (event.target.value) || (input < 52 || input > 57) ))  {
+        event.preventDefault(); 
+        value = null;
+    }    
+    if(value && !isNaN(value)) {
+        rowCount = value;        
         toggleSubmitButtonVisibility(true);
     } else {
         rowCount = 0;
