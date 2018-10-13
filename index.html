@@ -23,9 +23,13 @@
             </div>            
             <button id="downButton" onclick="moveDown()">Down</button>
         </div>
-        <div id="overlay">
+        <div id="over" class="overlay">
             <div >Game Over !!!</div>
             <div class="restart jello" onclick="location.reload()"><u>Restart</u></div>
+        </div>
+        <div id="win" class="overlay">
+            <div >You win !!!</div>
+            <div class="restart jello" onclick="continueGame()"><u>Continue</u></div>
         </div>
     </body>
 </html>

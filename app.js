@@ -1,5 +1,6 @@
 let rowCount = 0;
 let grid = [];
+let win = 0;
 
 let filledValueCount = 0;
 const allowedNumber = [2,4];
@@ -77,15 +78,19 @@ function startGame(){
 function renderSquare(grid, container) {    
     const colCount = grid.length;    
     let emptyCell = colCount * colCount;
+   
     let innerHTML = '';
     for(let col = 0; col < colCount; col++) {
         innerHTML += '<div class="cellWrapper">';
         const rowCount = grid[col].length;
         for(let row = 0 ; row < rowCount ; row++) {
-            let value = "";
+            let value = "";            
             if(grid[col][row]){
                 value = grid[col][row];
                 emptyCell--;
+            }
+            if( !win && value == 2048 ) {
+                win++;               
             }
             
             innerHTML += '<div class="cell" style="background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
@@ -94,8 +99,14 @@ function renderSquare(grid, container) {
     }
     container.innerHTML = innerHTML;
     if( !emptyCell ) {
-        gameHover();
+        gameOver();
     }
+
+    if ( win == 1 ) {     
+        win ++;  
+        gameWin();
+    }
+
 }
 
 function undo() {
@@ -126,10 +137,22 @@ function reset() {
     pushNewNumber();  
     renderSquare(grid,document.getElementById('gridContainer'));
 }
-function gameHover() {
-    var gameOver = document.getElementById('overlay');
+function gameOver() {
+    const gameOver = document.getElementById('over');
     if ( gameOver ) {
         gameOver.style.display = "flex";
+    }
+}
+function gameWin() {
+    const gameWin = document.getElementById('win');
+    if ( gameWin ) {
+        gameWin.style.display = "flex";
+    }
+}
+function continueGame() {
+    const gameWin = document.getElementById('win');
+    if ( gameWin ) {
+        gameWin.style.display = "none";
     }
 }
 function pushNewNumber() {    
