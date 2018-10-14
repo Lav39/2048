@@ -285,7 +285,7 @@ function traverseUp(grid,row,col) {
             const currentValue = grid[row][col];
             grid[row][col] += grid[rowCount-1][col];
             grid[rowCount-1][col] = 0;
-            if ( !currentValue ) {
+            if ( currentValue ) {
                 row--;
             }            
             rowCount--;
@@ -319,7 +319,7 @@ function traverseDown(grid,row,col) {
             grid[row][col] += grid[rowCount+1][col];
             grid[rowCount+1][col] = 0;
             rowCount++;
-            if ( !currentValue ) {
+            if ( currentValue ) {
                 row++; 
             }              
             //break;
@@ -352,7 +352,7 @@ function traverseLeft(grid,row,col) {
             grid[row][col] += grid[row][colCount-1];
             grid[row][colCount-1] = 0;
             colCount--;
-            if ( !currentValue ) {
+            if ( currentValue ) {
                 col--; 
             }            
             //break;
@@ -384,7 +384,7 @@ function traverseRight(grid,row,col) {
             grid[row][col] += grid[row][colCount+1];
             grid[row][colCount+1] = 0;
             colCount++;
-            if ( !currentValue ) {
+            if ( currentValue ) {
                 col++;
             }
             
