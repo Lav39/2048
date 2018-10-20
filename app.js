@@ -199,8 +199,13 @@ function insertAtIndex( value ) {
     const cellCount = emptyCell.length - 1;
     const cellIndex = Math.floor((Math.random() * cellCount) );
     const rowNumber = Math.floor(emptyCell[cellIndex] / gridLength);
-    const colNumber = emptyCell[cellIndex] < gridLength-1 ? emptyCell[cellIndex] : cellIndex % gridLength;     
-    grid[rowNumber][colNumber] = value;
+    const colNumber = emptyCell[cellIndex] < gridLength-1 ? emptyCell[cellIndex] : cellIndex % gridLength; 
+    if( grid[rowNumber][colNumber] ) {
+        insertAtIndex(value);
+    }  else {
+        grid[rowNumber][colNumber] = value;
+    }
+    
 }
 
 document.onkeydown = function() {    
