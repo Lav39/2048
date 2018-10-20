@@ -196,10 +196,13 @@ function insertAtIndex( value ) {
             count++;
         }
     }
-    const cellCount = emptyCell.length - 1;
+    const cellCount = emptyCell.length;
+    if( !cellCount ) {
+        return;
+    }
     const cellIndex = Math.floor((Math.random() * cellCount) );
     const rowNumber = Math.floor(emptyCell[cellIndex] / gridLength);
-    const colNumber = emptyCell[cellIndex] < gridLength-1 ? emptyCell[cellIndex] : cellIndex % gridLength; 
+    const colNumber = emptyCell[cellIndex] <= gridLength-1 ? emptyCell[cellIndex] : cellIndex % gridLength; 
     if( grid[rowNumber][colNumber] ) {
         insertAtIndex(value);
     }  else {
