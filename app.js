@@ -202,7 +202,7 @@ function insertAtIndex( value ) {
     }
     const cellIndex = Math.floor((Math.random() * cellCount) );
     const rowNumber = Math.floor(emptyCell[cellIndex] / gridLength);
-    const colNumber = emptyCell[cellIndex] <= gridLength-1 ? emptyCell[cellIndex] : cellIndex % gridLength; 
+    const colNumber = emptyCell[cellIndex] <= gridLength-1 ? emptyCell[cellIndex] : emptyCell[cellIndex] % gridLength; 
     if( grid[rowNumber][colNumber] ) {
         insertAtIndex(value);
     }  else {
