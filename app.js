@@ -27,8 +27,6 @@ let mobileView = false;
 function starOnMobileBrowser(){
     if(document.body.clientWidth < 1000 ) {
         mobileView = true;
-        rowCount = 5;       
-        startGame();
     }
 }
 starOnMobileBrowser();
