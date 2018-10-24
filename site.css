@@ -70,7 +70,7 @@ body {
     color: white;
     font-weight: 700;
     margin: 10px;
-    font-family: cursive;
+    font-family: monospace;
 }
 .overlay {
     position: absolute;
@@ -176,6 +176,9 @@ body {
         width: 6em;
         height: 6em;
         font-size: 36px;
+    }
+    #gridContainer {
+        padding: 20px;
     }
     
     
