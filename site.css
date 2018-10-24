@@ -65,6 +65,13 @@ body {
 .mb-20 {
     margin-bottom: 20px;
 }
+#score {
+    font-size: 30px;
+    color: white;
+    font-weight: 700;
+    margin: 10px;
+    font-family: cursive;
+}
 .overlay {
     position: absolute;
     top: 0;
@@ -160,6 +167,10 @@ body {
     }
     body, .cell {
         font-size: 36px; 
+    }
+    #score {
+        font-size: 42px;
+        margin: 50px;
     }
     .choose-box {
         width: 6em;

@@ -1,7 +1,8 @@
 let rowCount = 0;
 let grid = [];
 let win = 0;
-
+let highest = 0;
+let name = 'your'
 let filledValueCount = 0;
 const allowedNumber = [2,4];
 const colorHash = {
@@ -72,6 +73,9 @@ function renderSquare(grid, container) {
             let borderRadius = 'border-radius:0;';       
             if(grid[col][row]){
                 value = grid[col][row];
+                if(value > highest) {
+                    highest = value;
+                }
                 emptyCell--;
                 borderRadius = 'border-radius:5px;'; 
             }
@@ -90,6 +94,10 @@ function renderSquare(grid, container) {
         innerHTML += '</div>';
     }
     container.innerHTML = innerHTML;
+    let scoreDiv = document.getElementById('score');
+    if( scoreDiv ) {
+        scoreDiv.innerText = name + ' score : ' + highest; 
+    }
     if( !emptyCell ) {
         gameOver();
     }
