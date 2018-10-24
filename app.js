@@ -79,7 +79,8 @@ function renderSquare(grid, container) {
                 win++;               
             }
             if ( mobileView ) {
-                let cellSize = (document.body.clientWidth/rowCount) - 30 + "px";              
+                let cellSize = (document.body.clientWidth/rowCount) - 30 + "px";   
+                borderRadius = 'border-radius:15px;';            
                 innerHTML += '<div class="cell" style="'+borderRadius+' height:'+cellSize+';width:'+cellSize+'; background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
             } else {
                 innerHTML += '<div class="cell" style="'+borderRadius+'background:'+colorHash[grid[col][row]]+'">' + value + '</div>';

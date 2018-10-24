@@ -161,6 +161,11 @@ body {
     body, .cell {
         font-size: 36px; 
     }
+    .choose-box {
+        width: 6em;
+        height: 6em;
+        font-size: 36px;
+    }
     
     
 }
