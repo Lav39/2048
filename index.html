@@ -1,18 +1,12 @@
 <html>
     <head>        
-        <link rel="stylesheet" href="./site.css"></link>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-1277108649294587",
-            enable_page_level_ads: true
-          });
-        </script>    
+        <link rel="stylesheet" href="./site.css"></link>        
+       
     </head>
     <body id="appContainer" >
         <div id="countContainer">
-            <input type="text" name="rows" placeholder="Enter number > 3" onkeydown="onRowInput(event)"/>
-            <button id="submitButton" ontouchstart="startGame()" onclick="startGame()">Play</button>            
+           <div class="choose-box" ontouchstart="setCount(4)" onclick="setCount(4)">4X4</div>      
+           <div class="choose-box" ontouchstart="setCount(5)" onclick="setCount(5)">5X5</div>      
         </div>       
         <div id="mainContainer">
             <div class="mb-20">
@@ -37,8 +31,7 @@
             <div >You win !!!</div>
             <div class="restart jello" ontouchstart="continueGame()"  onclick="continueGame()"><u>Continue</u></div>
         </div>
-        <script src="./app.js"> </script>
-	
+        <script src="./app.js"> </script>    
 
     </body>
 </html>

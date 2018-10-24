@@ -33,35 +33,9 @@ function starOnMobileBrowser(){
 }
 starOnMobileBrowser();
 
-function onRowInput(event) {
-    const input = event.charCode || event.keyCode; 
-    let value = parseInt(String.fromCharCode(input));
-    const validKeyCode = [8,13, 18]    
-    if( validKeyCode.indexOf(input) == -1 && ( (event.target.value) || (input < 52 || input > 57) ))  {
-        event.preventDefault(); 
-        value = null;
-    }    
-    if(value && !isNaN(value)) {
-        rowCount = value;        
-        toggleSubmitButtonVisibility(true);
-    } else {
-        rowCount = 0;
-        toggleSubmitButtonVisibility(false);
-    }
-}
-
-function toggleSubmitButtonVisibility(enable) {
-    const submitButton = document.getElementById('submitButton')
-    if( submitButton ) {
-        if( enable ) {
-            submitButton.style.opacity = 1;
-            submitButton.style.cursor = 'pointer';
-        } else {
-            submitButton.style.opacity = 0.6;
-            submitButton.style.cursor = 'not-allowed';
-        }
-    }
-    
+function setCount(count){
+    rowCount = count;
+    startGame();
 }
 
 function startGame(){
@@ -96,19 +70,21 @@ function renderSquare(grid, container) {
         innerHTML += '<div class="cellWrapper">';
         const rowCount = grid[col].length;
         for(let row = 0 ; row < rowCount ; row++) {
-            let value = "";            
+            let value = "";     
+            let borderRadius = 'border-radius:0;';       
             if(grid[col][row]){
                 value = grid[col][row];
                 emptyCell--;
+                borderRadius = 'border-radius:5px;'; 
             }
             if( !win && value == 2048 ) {
                 win++;               
             }
             if ( mobileView ) {
                 let cellSize = (document.body.clientWidth/rowCount) - 30 + "px";              
-                innerHTML += '<div class="cell" style="height:'+cellSize+';width:'+cellSize+'; background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
+                innerHTML += '<div class="cell slideInRight" style="'+borderRadius+' height:'+cellSize+';width:'+cellSize+'; background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
             } else {
-                innerHTML += '<div class="cell" style="background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
+                innerHTML += '<div class="cell slideInRight" style="'+borderRadius+'background:'+colorHash[grid[col][row]]+'">' + value + '</div>';
             }
             
         }
